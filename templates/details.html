@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="/static/details.css">
+  <title>{{pokemon.name|capitalize}}</title>
+</head>
+
+<body>
+  <a href="/">Return</a>
+  <h1>{{pokemon.name|capitalize}}</h1>
+  <img src="{{pokemon['sprites']['front_default']}}" class="sprite" alt="{{pokemon_name}} sprite">
+  <ul>
+    <li>ID: {{pokemon.id}}</li>
+    <li>Name: {{pokemon.name|capitalize}}</li>
+    <li>Type(s): {{types}}</li>
+    <li>Generation: {{generation}} </li>
+    <li>Habitat: {{habitat}}</li>
+    <li>Abilities: {{abilities}}</li>
+    <li>Moves:
+      <ul>
+        {% for move in moves %}
+          <li>{{ move }}</li>
+        {% endfor %}
+      </ul>
+    </li>
+  <a href="/">Return</a>
+</body>
+
+</html>

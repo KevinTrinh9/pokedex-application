@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="/static/search.css">
+  <title>Pokedex</title>
+</head>
+
+<body>
+  <h1>Welcome to the Pokedex!</h1>
+  <img class="image" src="https://upload.wikimedia.org/wikipedia/commons/5/51/Pokebola-pokeball-png-0.png" alt="Pokeball image">
+    <form action="/search" method="get">
+      <input type="text" name="pokemon_name" placeholder="Search for a Pokemon">
+      <input type="submit" value="Search">
+    </form>
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    <div class="flash-message">
+      {% for message in messages %}
+      {{ message }}
+      {% endfor %}
+    </div>
+    {% endif %}
+    {% endwith %}
+    {% for pokemon in pokemon_list %}
+    <a href="{{ url_for('search', pokemon_name=pokemon.name) }}">
+    <div class="pokemon-container">
+      <img src="{{ pokemon_sprites[pokemon.name.capitalize()] }}" alt="{{ pokemon.name.capitalize() }} sprite">
+      <p class="pokemon-name">{{ pokemon.name.capitalize() }}</p>
+    </div>
+    </a>
+    {% endfor %}
+    <div class="pagination">
+      {% if prev_offset is not none %}
+      <form action="/" method="get">
+        <button type="submit" name="offset" value="{{ prev_offset }}">Previous</button>
+      </form>
+      {% endif %}
+      {% if next_offset is not none %}
+      <form action="/" method="get">
+        <button type="submit" name="offset" value="{{ next_offset }}">Next</button>
+      </form>
+      {% endif %}
+    </div>
+</body>
+
+</html>
